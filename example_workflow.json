@@ -1,0 +1,38 @@
+{
+  "name": "Send Email on Form Submission",
+  "definition": {
+    "trigger": {
+      "type": "form_submitted",
+      "conditions": {
+        "path": "template_id",
+        "op": "==",
+        "value": "form_submitted"
+      }
+    },
+    "initial_step_id": "step1",
+    "steps": [
+      {
+        "id": "step1",
+        "name": "Send Email Notification",
+        "type": "auto_action",
+        "actions": [
+          {
+            "type": "send_email",
+            "config": {
+              "to_path": "data.email",
+              "subject": "Form Submission Confirmation - {template_id}",
+              "body": "Hello,\n\nYour form submission has been received successfully.\n\nSubmission ID: {submission_id}\nTemplate: {template_id}\n\nThank you!"
+            }
+          }
+        ],
+        "transitions": [
+          {
+            "to_step_id": null,
+            "condition": null
+          }
+        ]
+      }
+    ]
+  }
+}
+
