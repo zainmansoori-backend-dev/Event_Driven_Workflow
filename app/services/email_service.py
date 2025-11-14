@@ -19,7 +19,6 @@ class EmailService:
         self.smtp_user = os.getenv("SMTP_USER", "")
         self.smtp_password = os.getenv("SMTP_PASSWORD", "")
         self.from_email = os.getenv("FROM_EMAIL", self.smtp_user)
-        self.use_tls = os.getenv("SMTP_USE_TLS", "true").lower() == "true"
     
     def send_email(
         self,

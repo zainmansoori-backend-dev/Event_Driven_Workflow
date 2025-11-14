@@ -11,7 +11,7 @@ class FormSubmission(Base):
     template_id = Column(String, nullable=False)
     data = Column(JSON, nullable=False)
     org_id = Column(String, nullable=True)
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    created_at = Column(DateTime, default=datetime.now(datetime.timezone.utc))
 
 class WorkflowDefinition(Base):
     __tablename__ = "workflow_definitions"
@@ -20,7 +20,7 @@ class WorkflowDefinition(Base):
     is_active = Column(Boolean, default=True)
     # JSON like: {"trigger": {"type": "form_submitted", "conditions": {"path":"template_id","op":"==","value":"form_submitted"}} , "steps":[...]}
     definition = Column(JSON, nullable=False)
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    created_at = Column(DateTime, default=datetime.now(datetime.timezone.utc))
 
 class WorkflowInstance(Base):
     __tablename__ = "workflow_instances"
@@ -29,7 +29,7 @@ class WorkflowInstance(Base):
     current_step = Column(String, nullable=True)
     status = Column(String, default="pending")
     context = Column(JSON, nullable=True)
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    created_at = Column(DateTime, default=datetime.now(datetime.timezone.utc))
 
 class Outbox(Base):
     __tablename__ = "outbox"
@@ -38,4 +38,4 @@ class Outbox(Base):
     payload = Column(JSON, nullable=False)
     org_id = Column(String, nullable=True)
     published_at = Column(DateTime, nullable=True)
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    created_at = Column(DateTime, default=datetime.now(datetime.timezone.utc))
